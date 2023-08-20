@@ -87,24 +87,17 @@ namespace VARS {
 
 
 
-	template<typename type>
-
+	template <typename type>
 	type memRead(uintptr_t pointerStatic) {
-
 		type value = { };
-
-		ReadProcessMemory(processHandle, (LPCVOID)pointerStatic, sizeof(type), NULL);
-
+		ReadProcessMemory(VARS::processHandle, (LPVOID)pointerStatic, &value, sizeof(type), NULL);
 		return value;
-
 	}
 
-
-	template<typename type>
-
+	template <typename type>
 	bool memWrite(uintptr_t pointerStatic, type value) {
 
-		return WriteProcessMemory(processHandle, (LPVOID)pointerStatic, value, sizeof(type), NULL);
+		return WriteProcessMemory(VARS::processHandle, (LPVOID)pointerStatic, &value, sizeof(type), NULL);
 
 	}
 
